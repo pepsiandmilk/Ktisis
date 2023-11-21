@@ -49,7 +49,7 @@ namespace Ktisis.Interface.Windows.Workspace {
 			var displaySize = ImGui.GetIO().DisplaySize;
 			var maxSize = new Vector2(displaySize.X / 4f, displaySize.Y * 0.9f);
 			ImGui.SetNextWindowSizeConstraints(Vector2.Zero, maxSize);
-			if (ImGui.Begin($"Ktisis ({Ktisis.Version})", ref Visible, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.AlwaysAutoResize)) {
+			if (ImGui.Begin($"Ktisis ({Ktisis.Version})", ref Visible, ImGuiWindowFlags.NoScrollbar)) {
 
 				ControlButtons.PlaceAndRenderSettings();
 

@@ -41,12 +41,16 @@ namespace Ktisis.Interface.Components {
 			if (Skeleton.IsBoneSelected(bone))
 				flag |= ImGuiTreeNodeFlags.Selected;
 
-			var show = DrawBoneNode(bone, flag, () => OverlayWindow.SetGizmoOwner(bone.UniqueName));
-			if (show) {
+			if (bone.Categories.Any(category => Ktisis.Configuration.ShowBoneByCategory.TryGetValue(category.Name, out var value) && value)) {
+				var show = DrawBoneNode(bone, flag, () => OverlayWindow.SetGizmoOwner(bone.UniqueName));
+				if (show) {
+					foreach (var child in children)
+						DrawBoneTreeNode(child);
+					ImGui.TreePop();
+				}
+			} else
 				foreach (var child in children)
 					DrawBoneTreeNode(child);
-				ImGui.TreePop();
-			}
 		}
 
 		private static bool DrawBoneNode(Bone bone, ImGuiTreeNodeFlags flag, System.Action? executeIfClicked = null) {
